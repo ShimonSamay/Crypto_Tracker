@@ -2,28 +2,28 @@ import "./Login.css";
 import { useContext, useRef, useState } from "react";
 import { ReducersContext } from "../../../Contexts/Context";
 import { loginAction } from "../../../Actions/User-Action";
-import { handleLogIn } from "../../../Services/User";
+import { loginHandler } from "../../../Services/User";
 
 const Login = ({setRegisterScreen}) => {
 
    const { user, userDispatch } = useContext(ReducersContext);
-   const [error , setError] = useState(false) ;
+   const [error , setError] = useState(null) ;
    const inputRef = useRef();
 
    const getInputValues = (e) => {
     user[e.target.name] = e.target.value;
   };
 
-   const logInUser = (e) => {
+   const login = (e) => {
     e.preventDefault();
-    handleLogIn(user , userDispatch , loginAction , setError , inputRef.current.value)
+    loginHandler(user , userDispatch , loginAction , setError , inputRef.current.value)
   };
 
   return (
     <section className="Login-Container">
       <div className="form-wrapper">
         <h1>Login</h1>
-        <form onSubmit={logInUser}>
+        <form onSubmit={login}>
           <div className="form-item">
             <input onChange={getInputValues} className="Confirm-Input" type="text" name="email" required placeholder="Email"/>
             <input onChange={getInputValues} className="Confirm-Input" minLength={5} type="password" name="password" required placeholder="Password"/>
@@ -32,7 +32,7 @@ const Login = ({setRegisterScreen}) => {
           <div className="button-panel">
             <button>Login</button>
           </div>
-          <span>{error && "No matching passwords ... "}</span>
+          <span>{error}</span>
         </form>
         <div className="form-footer">
           <span onClick={setRegisterScreen}>Create an account</span>

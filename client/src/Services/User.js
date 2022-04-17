@@ -3,7 +3,7 @@ import { validatePasswords } from "../Utils/Validate-Password";
 
 const baseUrl = "http://localhost:4000/users" ;
 
-export const handleRegister = async (user) => {
+export const registerHandler = async (user , setMessage) => {
     let options = {
         method: "POST" ,
         headers: { "Content-Type" : "application/json" } ,
@@ -11,12 +11,17 @@ export const handleRegister = async (user) => {
     }
    return await fetch (`${baseUrl}/register` , options)
     .then(response => response.json())
+    .then(response => {
+      setMessage(response.message);
+      setTimeout(() => {
+        setMessage(null);
+      } , 3000)
+    })
     .catch(error => error)
 };
 
-export const handleLogIn = async (user , dispatch , action , setErrMessage , passwordToConfirm) => {
+export const loginHandler = async (user , dispatch , action , setErrMessage , passwordToConfirm) => {
    if (validatePasswords(user , passwordToConfirm)) {
-    setErrMessage(false);
     let options = {
         method: "POST" ,
         headers: { "Content-Type" : "application/json" } ,
@@ -25,15 +30,19 @@ export const handleLogIn = async (user , dispatch , action , setErrMessage , pas
     return await fetch (`${baseUrl}/login` , options)
     .then(response => response.json())
     .then(response => {
+     if (!response.success ) {
+        setErrMessage(response.message) ;
+        setTimeout(() => {setErrMessage(null)} , 3000) ;
+     }
       const decoded = jwt_decode(response.token);
       dispatch(action(decoded.user));
     })
     .catch(error => error)
 }
   else {
-    setErrMessage(true);
+    setErrMessage("Password confirmation failed ...");
     setTimeout(() => {
-        setErrMessage(false);
+        setErrMessage(null);
     } , 3000)
   }
 }

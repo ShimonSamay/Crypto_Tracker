@@ -1,26 +1,27 @@
 import "./Register.css";
 import { useState } from "react";
-import { handleRegister } from "../../../Services/User";
+import { registerHandler } from "../../../Services/User";
 
 const Register = ({setLoginScreen}) => {
 
-  const [newUser , setNewUser] = useState({}) ;
+  const [newUser,setNewUser] = useState({}) ;
+  const [message , setMessage] = useState(null) ;
   
   const getInputValues = (e) => {
     newUser[e.target.name] = e.target.value;
   };
 
-  const registerUser = (e) => {
+  const register = (e) => {
     e.preventDefault();
     setNewUser({...newUser});
-    handleRegister(newUser)
+    registerHandler(newUser , setMessage);
   };
 
   return (
     <section className="Register-Container">
       <div className="form-wrapper">
         <h1>Register</h1>
-        <form onSubmit={registerUser}>
+        <form onSubmit={register}>
           <div className="form-item">
             <input onChange={getInputValues} className="Confirm-Input" type="text" name="firstName" required placeholder="First Name"/>
             <input onChange={getInputValues} className="Confirm-Input" type="text" name="lastName" required placeholder="Last Name"/>
@@ -29,6 +30,7 @@ const Register = ({setLoginScreen}) => {
           </div>
           <div className="button-panel">
             <button>REGISTER</button>
+            <span style={{color:"white"}}>{message}</span>
           </div>
           <div className="form-footer">
           <span onClick={setLoginScreen}>Login</span>

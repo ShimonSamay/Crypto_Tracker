@@ -6,13 +6,13 @@ const jwt = require("jsonwebtoken");
 const register = async (req,res) => {
   const {email , password} = req.body;
   const user = await Users.findOne({email:email});
-  if(user) return res.status(400).json({message: "email exist , try again"});
+  if(user) return res.status(400).json({success:false , message: "email exist , try again"});
   bcrypt.hash(password , 10 , async (err , hashed) => {
-      if(err) return res.status(400).json({Error: "error accrued while hashing password"});
+      if(err) return res.status(400).json({ success:false , message: "error accrued while hashing password"});
       req.body.password = hashed;
       await Users.create(req.body)
-      .then(() => res.status(200).json({success:true}))
-      .catch(error => res.status(500).json({success:false,error}))
+      .then(() => res.status(200).json({success:true ,  message: "Registered successfully"}))
+      .catch(error => res.status(500).json({success:false , message:"Registration failed"}))
   })
 };
 
@@ -20,10 +20,10 @@ const register = async (req,res) => {
 const login =  async (req,res) => {
    const {email , password} = req.body;
    const user = await Users.findOne({email:email});
-   if(user == null) return res.status(400).json({message:"email not found"});
+   if(user == null) return res.status(400).json({success:false , message:"Email not found"});
    bcrypt.compare(password , user.password , (err , isMatch) => {
-    if (err) return res.status(500).json({message:"error while hashing password"});
-    if(!isMatch) return res.status(400).json({message:"not matching password"})
+    if (err) return res.status(500).json({ success:false , message:"error while hashing password"});
+    if(!isMatch) return res.status(400).json({success:false,message:"Wrong password"})
     const token = jwt.sign({user},process.env.SECRET_KEY , {expiresIn:"30m"});
     return res.status(200).json({loggedIn:true , token});
    })

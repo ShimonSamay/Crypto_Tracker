@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import 'react-alice-carousel/lib/alice-carousel.css';
 
 ReactDOM.render(
   <React.StrictMode>
