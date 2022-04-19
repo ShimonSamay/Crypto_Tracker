@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-import { validatePasswords } from "../Utils/Validate-Password";
+import { validatePasswords } from "../Utils/Utils-Functions";
 
 const baseUrl = "http://localhost:4000/users" ;
 
@@ -32,7 +32,9 @@ export const loginHandler = async (user , dispatch , action , setErrMessage , pa
     .then(response => {
      if (!response.success ) {
         setErrMessage(response.message) ;
-        setTimeout(() => {setErrMessage(null)} , 3000) ;
+        setTimeout(() => {
+          setErrMessage(null)
+        } , 3000) ;
      }
       const decoded = jwt_decode(response.token);
       dispatch(action(decoded.user));

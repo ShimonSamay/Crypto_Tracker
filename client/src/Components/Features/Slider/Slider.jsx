@@ -1,23 +1,20 @@
 import "./Slider.css";
-import { useLayoutEffect, useState } from "react";
-import { getCryptoData } from "../../../Services/Crypto-Data";
+import { useContext } from "react";
+import { ReducersContext } from "../../../Contexts/Context";
 import AliceCarousel from 'react-alice-carousel';
 
 const Slider = () => {
-  const [sliderCoins, setSliderCoins] = useState([]);
 
-  useLayoutEffect(() => {
-    getCryptoData()
-    .then((data) => setSliderCoins(data));
-  }, []);
-  
-  let coins = sliderCoins.map((coin) => 
+  const {cryptoData,cryptoStatsDispatch} = useContext(ReducersContext);
+
+  let coins = cryptoData.map((coin) => 
     <section className="coins-info-container">
     <img className="slider-Pics"
     src={coin.image}
     alt={coin.name}
     />
-    <span style={{color:"wheat"}}>{coin.symbol}</span>
+    <span style={{color:"white" , fontSize:"15px"}}>{coin.symbol} </span><span style={{color: coin.price_change_percentage_24h > 0 ? "green" : "red" , fontWeight:"bold"}}>{coin.price_change_percentage_24h > 0 && "+"}{coin.price_change_percentage_24h.toFixed(2)}%</span>
+    <p style={{color:"whitesmoke" , fontSize:"15px"}}>{coin.market_cap.toLocaleString('en-US')}$</p>
     </section>
   )
 
