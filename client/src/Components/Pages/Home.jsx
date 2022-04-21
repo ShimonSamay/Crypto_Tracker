@@ -3,7 +3,7 @@ import Login from "../Features/Login/Login" ;
 import Register from "../Features/Register/Register";
 
 
-const HomePage = () => {
+const Home = () => {
   
   let [loginView , setLoginView] = useState(true) ;
   
@@ -15,4 +15,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage ; 
+export default Home ; 

@@ -9,11 +9,13 @@ const Slider = () => {
 
   let coins = cryptoData.map((coin) => 
     <section className="coins-info-container">
-    <img className="slider-Pics"
-    src={coin.image}
-    alt={coin.name}
-    />
-    <span style={{color:"white" , fontSize:"15px"}}>{coin.symbol} </span><span style={{color: coin.price_change_percentage_24h > 0 ? "green" : "red" , fontWeight:"bold"}}>{coin.price_change_percentage_24h > 0 && "+"}{coin.price_change_percentage_24h.toFixed(2)}%</span>
+    <img className="slider-Pics" src={coin.image} alt={coin.name} />
+    <div>
+      <span>{coin.symbol}</span>
+      <span style={{color: coin.price_change_percentage_24h > 0 ? "green" : "red"}}>
+      {coin.price_change_percentage_24h > 0 && "+"}{coin.price_change_percentage_24h.toFixed(2)}%
+      </span>
+    </div>
     <p style={{color:"whitesmoke" , fontSize:"15px"}}>{coin.market_cap.toLocaleString('en-US')}$</p>
     </section>
   )

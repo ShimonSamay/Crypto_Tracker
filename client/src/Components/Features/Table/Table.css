@@ -1,0 +1,59 @@
+.Table-Input {
+  margin-top: 2%;
+  width: 20%;
+  padding: 10px;
+  text-align: center;
+  outline: none;
+  transition: 0.5s all linear;
+  font-size: 15px;
+  border-radius: 20px;
+  margin-left: 15%;
+}
+
+img {
+  width: 5vw;
+  height: 5vw;
+  cursor: pointer;
+}
+
+span {
+  margin-left: 2%;
+}
+
+.window {
+  cursor: pointer;
+}
+
+.Menu-container {
+  width: 90vw;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start
+}
+
+.Table-Input:hover {
+  width: 30%;
+}
+
+@media screen and (max-width: 600px) {
+  .Table-Container {
+    padding-top: 5%;
+  }
+
+  .Mui-Table-Container {
+    width: 20vw;
+    height: 50vw;
+  }
+
+  .Table-Input {
+    margin-top: 1%;
+    width: 50%;
+    padding: 5px;
+    margin-left: 10%;
+  }
+
+  .Table-Input:hover {
+    width: 50%;
+  }
+}

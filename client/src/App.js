@@ -1,5 +1,5 @@
 import ReducersProvider from "./Contexts/Context";
-import HomePage from "./Components/Pages/HomePage";
+import Home from "./Components/Pages/Home";
 import Info from "./Components/Pages/Info";
 import './App.css';
 
