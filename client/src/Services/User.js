@@ -20,7 +20,7 @@ export const registerHandler = async (user , setMessage) => {
     .catch(error => error)
 };
 
-export const loginHandler = async (user , dispatch , action , setErrMessage , passwordToConfirm) => {
+export const loginHandler = async (user , dispatch , action , setErrMessage , passwordToConfirm , navigate) => {
    if (validatePasswords(user , passwordToConfirm)) {
     let options = {
         method: "POST" ,
@@ -38,6 +38,7 @@ export const loginHandler = async (user , dispatch , action , setErrMessage , pa
      }
       const decoded = jwt_decode(response.token);
       dispatch(action(decoded.user));
+      navigate("/coins");
     })
     .catch(error => error)
 }

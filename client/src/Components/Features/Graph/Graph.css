@@ -1,0 +1,16 @@
+.graph-Container {
+  width: 70vw;
+  max-height: 100vh;
+}
+
+@media screen and (max-width: 500px) {
+  .graph-Container {
+    width: 100vw;
+    max-height: 50vh;
+    padding-top: 15%;
+  }
+
+  .graph {
+    width: 100vw;
+  }
+}

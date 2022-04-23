@@ -1,13 +1,14 @@
 import "./Login.css";
-import { useContext, useRef, useState } from "react";
+import { useContext , useEffect, useRef , useState } from "react";
 import { ReducersContext } from "../../../Contexts/Context";
 import { loginAction } from "../../../Actions/User-Action";
 import { loginHandler } from "../../../Services/User";
 
+
 const Login = ({setRegisterScreen}) => {
 
-   const { user, userDispatch } = useContext(ReducersContext);
-   const [error , setError] = useState(null) ;
+   const { user, userDispatch , appNavigator } = useContext(ReducersContext);
+   const [message , setMessage] = useState("") ;
    const inputRef = useRef();
 
    const getInputValues = (e) => {
@@ -16,9 +17,9 @@ const Login = ({setRegisterScreen}) => {
 
    const login = (e) => {
     e.preventDefault();
-    loginHandler(user , userDispatch , loginAction , setError , inputRef.current.value)
+    loginHandler(user , userDispatch , loginAction , setMessage , inputRef.current.value , appNavigator)
   };
-
+ 
   return (
     <section className="Login-Container">
       <div className="form-wrapper">
@@ -32,7 +33,7 @@ const Login = ({setRegisterScreen}) => {
           <div className="button-panel">
             <button>Login</button>
           </div>
-          <span>{error}</span>
+          <span>{message}</span>
         </form>
         <div className="form-footer">
           <span onClick={setRegisterScreen}>Create an account</span>

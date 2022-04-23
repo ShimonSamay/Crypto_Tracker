@@ -11,3 +11,25 @@ export const loginAction = (value) => {
     payload : value
   }
 }
+
+export const logoutAction = () => {
+  return {
+    type : "LOGOUT" ,
+  }
+}
+
+export const addToWishlist = (value) => {
+  return {
+    type : "ADD" ,
+    payload : value
+  }
+}
+
+export const removeFromWishlist = (value) => {
+  return {
+    type : "REMOVE" ,
+    payload : value
+  }
+}
+
+

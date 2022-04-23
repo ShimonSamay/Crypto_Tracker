@@ -1,15 +1,10 @@
-import ReducersProvider from "./Contexts/Context";
-import Home from "./Components/Pages/Home";
-import Info from "./Components/Pages/Info";
 import './App.css';
+import AppRouter from './AppRouter';
 
-
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <ReducersProvider>
-       <Info/>
-      </ReducersProvider>
+     <AppRouter/>
     </div>
   );
 }
