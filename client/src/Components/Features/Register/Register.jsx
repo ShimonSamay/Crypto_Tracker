@@ -5,7 +5,7 @@ import { registerHandler } from "../../../Services/User";
 const Register = ({setLoginScreen}) => {
 
   const [newUser,setNewUser] = useState({}) ;
-  const [message , setMessage] = useState(null) ;
+  const [message , setMessage] = useState("") ;
   
   const getInputValues = (e) => {
     newUser[e.target.name] = e.target.value;
@@ -29,8 +29,8 @@ const Register = ({setLoginScreen}) => {
             <input onChange={getInputValues} className="Confirm-Input" type="password" name="password" required placeholder="Password"/>
           </div>
           <div className="button-panel">
+            <span>{message}</span>
             <button>REGISTER</button>
-            <span style={{color:"white"}}>{message}</span>
           </div>
           <div className="form-footer">
           <span onClick={setLoginScreen}>Login</span>

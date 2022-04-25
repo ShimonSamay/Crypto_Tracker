@@ -1,6 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400");
-@import url("http://weloveiconfonts.com/api/?family=fontawesome");
-
 * {
   margin: 0;
   padding: 0;
@@ -22,6 +19,7 @@
 
 h1 {
   text-align: center;
+  color: #f16272;
   padding: 1em 0;
 }
 
@@ -86,6 +84,12 @@ form {
   border-radius: 30px;
 }
 
+.button-panel :first-child {
+  color: #f16272;
+  position: relative;
+  bottom: 2vh;
+}
+
 .button-panel button :hover {
   background: #ee3e52;
 }
@@ -117,6 +121,12 @@ form {
     height: 65vh;
     margin-left: 15%;
     width: 80vw;
+  }
+
+  .button-panel :first-child {
+    color: #f16272;
+    position: relative;
+    bottom: 2vh;
   }
 
   .Confirm-Input {

@@ -10,9 +10,11 @@ const Home = () => {
   const changeScreen = () => {
     setLoginView(!loginView);
   }
+
   return (
    loginView ? <Login setRegisterScreen={changeScreen}/> : <Register setLoginScreen={changeScreen}/> 
   )
+  
 }
 
 export default Home ; 

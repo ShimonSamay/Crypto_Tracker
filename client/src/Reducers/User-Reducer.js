@@ -12,10 +12,10 @@ export const userReducer = (state, action) => {
       return { loggedIn: false };
 
     case "ADD" : 
-     return  { ...state , wishlist:[...state.wishlist , payload] } ;
+     return  { ...state , wishlist:[...state.wishlist , payload] };
 
      case "REMOVE" :
-       return { ... state , wishlist:[...state.wishlist.filter(crypto => crypto !== payload)] } 
+       return { ...state , wishlist:state.wishlist.filter(crypto => crypto !== payload) };
 
     default:
       return state;

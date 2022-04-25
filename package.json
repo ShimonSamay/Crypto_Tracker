@@ -2,11 +2,15 @@
   "name": "crypto-tracker",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server/cdserver.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "npm install && cd client && npm install",
     "start": "node server/server.js",
-    "server": "nodemon node server/server.js"
+    "server": "nodemon node server/server.js",
+    "client": "cd client && npm run start",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +23,7 @@
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.10",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "path": "^0.12.7"
   }
 }

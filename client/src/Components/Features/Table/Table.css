@@ -1,13 +1,13 @@
 .Table-Input {
   margin-top: 2%;
-  width: 20%;
+  width: 30%;
   padding: 10px;
   text-align: center;
   outline: none;
   transition: 0.5s all linear;
   font-size: 15px;
   border-radius: 20px;
-  margin-left: 15%;
+  margin-left: 6%;
 }
 
 img {
@@ -32,8 +32,32 @@ span {
   justify-content: flex-start;
 }
 
-.Table-Input:hover {
-  width: 30%;
+.Menu-container > section {
+  position: relative;
+  left: 45%;
+  top: 17%;
+  width: 15vw;
+  height: auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.badge {
+  color: yellow !important;
+}
+
+.Menu-container > section > span > svg {
+  font-size: 30px !important;
+  color: white;
+}
+
+.Menu-container > section > svg > path {
+  font-size: 80px !important;
+  color: white;
+}
+
+.logout {
+  font-size: 30px !important;
 }
 
 @media screen and (max-width: 600px) {
@@ -41,9 +65,22 @@ span {
     padding-top: 5%;
   }
 
+  .Menu-container {
+    width: 70vw;
+  }
+
   .Mui-Table-Container {
     width: 20vw;
     height: 50vw;
+  }
+
+  .Menu-container > section > span > svg {
+    font-size: 30x !important;
+  }
+
+  .Menu-container > section > svg > path {
+    font-size: 30px !important;
+    color: white;
   }
 
   .Table-Input {
@@ -53,12 +90,7 @@ span {
     margin-left: 10%;
   }
 
-  .Table-Input:hover {
-    width: 50%;
-  }
-
   td {
-     line-height: 0.43 !important; 
+    line-height: 0.43 !important;
   }
-
 }

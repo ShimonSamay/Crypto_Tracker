@@ -7,29 +7,27 @@ export const registerAction = (value) => {
 
 export const loginAction = (value) => {
   return {
-    type : "LOGIN" ,
-    payload : value
-  }
-}
+    type: "LOGIN",
+    payload: value,
+  };
+};
 
 export const logoutAction = () => {
   return {
-    type : "LOGOUT" ,
-  }
-}
+    type: "LOGOUT",
+  };
+};
 
 export const addToWishlist = (value) => {
   return {
-    type : "ADD" ,
-    payload : value
-  }
-}
+    type: "ADD",
+    payload: value,
+  };
+};
 
 export const removeFromWishlist = (value) => {
   return {
-    type : "REMOVE" ,
-    payload : value
-  }
-}
-
-
+    type: "REMOVE",
+    payload: value,
+  };
+};

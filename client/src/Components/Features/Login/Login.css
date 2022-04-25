@@ -1,6 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400");
-@import url("http://weloveiconfonts.com/api/?family=fontawesome");
-
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +7,6 @@
 .Login-Container {
   margin-right: 29%;
   padding-top: 1.5%;
-  
 }
 
 .form-wrapper {
@@ -82,7 +78,7 @@ form {
 .button-panel button {
   background: #f16272;
   border: none;
-  color: #fff;
+  color: #fff !important;
   cursor: pointer;
   height: 50px;
   font-family: "Open Sans", sans-serif;

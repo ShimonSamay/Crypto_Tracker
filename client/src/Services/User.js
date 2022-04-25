@@ -1,7 +1,8 @@
 import jwt_decode from "jwt-decode";
 import { validatePasswords } from "../Utils/Utils-Functions";
 
-const baseUrl = "http://localhost:4000/users" ;
+const baseUrl = process.env.NODE_ENV === 'production' ? 
+"https://coin-verse.herokuapp.com/users" : 'http://localhost:4000/users';
 
 export const registerHandler = async (user , setMessage) => {
     let options = {
@@ -9,13 +10,13 @@ export const registerHandler = async (user , setMessage) => {
         headers: { "Content-Type" : "application/json" } ,
         body: JSON.stringify(user)
     }
-   return await fetch (`${baseUrl}/register` , options)
+   return await fetch (`${baseUrl}/register` , options )
     .then(response => response.json())
     .then(response => {
-      setMessage(response.message);
-      setTimeout(() => {
-        setMessage(null);
-      } , 3000)
+       setMessage(response.message);
+       setTimeout(() => {
+        setMessage("")
+       } , 3000);
     })
     .catch(error => error)
 };
@@ -33,7 +34,7 @@ export const loginHandler = async (user , dispatch , action , setErrMessage , pa
      if (!response.success ) {
         setErrMessage(response.message) ;
         setTimeout(() => {
-          setErrMessage(null)
+          setErrMessage("")
         } , 3000) ;
      }
       const decoded = jwt_decode(response.token);
@@ -45,7 +46,7 @@ export const loginHandler = async (user , dispatch , action , setErrMessage , pa
   else {
     setErrMessage("Password confirmation failed ...");
     setTimeout(() => {
-        setErrMessage(null);
+        setErrMessage("");
     } , 3000)
   }
 }

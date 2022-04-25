@@ -1,5 +1,5 @@
 import "./Login.css";
-import { useContext , useEffect, useRef , useState } from "react";
+import { useContext , useRef , useState } from "react";
 import { ReducersContext } from "../../../Contexts/Context";
 import { loginAction } from "../../../Actions/User-Action";
 import { loginHandler } from "../../../Services/User";
@@ -31,9 +31,9 @@ const Login = ({setRegisterScreen}) => {
             <input ref={inputRef} className="Confirm-Input" type="password" name="confirmPassword" required="required" placeholder="Confirm Password"/>
           </div>
           <div className="button-panel">
+            <span>{message}</span>
             <button>Login</button>
           </div>
-          <span>{message}</span>
         </form>
         <div className="form-footer">
           <span onClick={setRegisterScreen}>Create an account</span>

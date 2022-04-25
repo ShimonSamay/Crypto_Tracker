@@ -24,6 +24,11 @@
   margin: 0 5px;
 }
 
+.coins-info-container div + p {
+  color: whitesmoke;
+  font-size: 15px;
+}
+
 @media screen and (max-width: 500px) {
   .slider-Container {
     padding-top: 2%;
