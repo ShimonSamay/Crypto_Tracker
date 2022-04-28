@@ -1,5 +1,5 @@
 import "./Table.css";
-import { useContext , useLayoutEffect , useState } from "react";
+import { useContext , useLayoutEffect , useRef, useState } from "react";
 import { ReducersContext } from "../../../Contexts/Context";
 import { cryptoStatsActions } from "../../../Actions/Crypto-Stats-Actions";
 import { logoutAction } from "../../../Actions/User-Action";
@@ -23,6 +23,7 @@ import Tooltip from '@mui/material/Tooltip';
 
   const {cryptoData , cryptoStatsDispatch , appNavigator , user , userDispatch} = useContext(ReducersContext);
   const [tableData , setTableData] = useState([]);
+  const modalRef = useRef();
   
   useLayoutEffect(() => {
     cryptoData.length && setTableData(destructureItem(cryptoData.sort((a,b) => a.market_cap - b.market_cap)));
@@ -40,28 +41,39 @@ import Tooltip from '@mui/material/Tooltip';
   };
 
   const getCryptoStats = (crypto) => {
-  cryptoStatsDispatch(cryptoStatsActions(crypto));
-  appNavigator("/coin");
+    cryptoStatsDispatch(cryptoStatsActions(crypto));
+    appNavigator("/coin");
   };
  
-  const AddToFavorites = (crypto) => {
- userDispatch(addToWishlist(crypto));
- };
+  const addToFavorites = (crypto) => {
+    userDispatch(addToWishlist(crypto));
+  };
 
   const deleteFromFavorites = (crypto) => {
-  userDispatch(removeFromWishlist(crypto));
- };
+    userDispatch(removeFromWishlist(crypto));
+  };
 
   const logout = () => {
-  userDispatch(logoutAction());
- };
+    userDispatch(logoutAction());
+  };
+
+  const handleModal = () => {
+    modalRef.current.open ?  modalRef.current.close() :  modalRef.current.showModal() ;
+  };
  
   return (
     <section className="Table-Container">
      <section className="Menu-container">
        <input onChange={searchCryptoByName} className="Table-Input" placeholder="Search any crypto ..."></input> {user.wishlist.length}
+       <dialog ref={modalRef}>
+        <p> Sure You Want to Exit ? </p>
+        <section>
+       <p onClick={logout}> &#9989;</p>
+       <p onClick={handleModal}> &#10060;</p>
+        </section>
+       </dialog>
        <section>
-          <LogoutOutlinedIcon className="logout" onClick={logout} />
+          <LogoutOutlinedIcon className="logout" onClick={handleModal} />
           <Badge className="badge"  badgeContent={user.wishlist.length}>
            {!user.wishlist.length ? <StarOutlineIcon  style={{ color: 'white'}}  fontSize="small"/> :  <StarIcon fontSize="small" style={{ color: 'yellow' }}/>} 
           </Badge>
@@ -108,7 +120,7 @@ import Tooltip from '@mui/material/Tooltip';
               user.wishlist.includes(crypto) ?
                <StarIcon fontSize="small" onClick={() => deleteFromFavorites(crypto)}  style={{ color: 'yellow' , cursor:"pointer"}}/>
               :
-               <StarOutlineIcon fontSize="small" onClick={() => AddToFavorites(crypto) } style={{ color: 'black' , cursor:"pointer"}}/>
+               <StarOutlineIcon fontSize="small" onClick={() => addToFavorites(crypto) } style={{ color: 'black' , cursor:"pointer"}}/>
              }  
              </span>
               </TableCell>
