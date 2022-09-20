@@ -2,7 +2,7 @@ import jwt_decode from "jwt-decode";
 import { validatePasswords } from "../Utils/Utils-Functions";
 
 const baseUrl = process.env.NODE_ENV === 'production' ?  
-"https://coin-verse.herokuapp.com/users" : 'http://localhost:6500/users';
+"https://crypto-tracker-7284.onrender.com/users" : 'http://localhost:6500/users';
 
 
 export const registerHandler = async (user , setMessage) => {
