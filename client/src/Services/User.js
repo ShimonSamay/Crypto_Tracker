@@ -1,18 +1,20 @@
 import jwt_decode from "jwt-decode";
 import { validatePasswords } from "../Utils/Utils-Functions";
 
-const baseUrl = process.env.NODE_ENV === 'production' ? 
-"https://coin-verse.herokuapp.com/users" : 'http://localhost:4000/users';
+const baseUrl = process.env.NODE_ENV === 'production' ?  
+"https://coin-verse.herokuapp.com/users" : 'http://localhost:6500/users';
+
 
 export const registerHandler = async (user , setMessage) => {
     let options = {
         method: "POST" ,
         headers: { "Content-Type" : "application/json" } ,
         body: JSON.stringify(user)
-    }
+    } 
    return await fetch (`${baseUrl}/register` , options )
     .then(response => response.json())
     .then(response => {
+      console.log({response});
        setMessage(response.message);
        setTimeout(() => {
         setMessage("")

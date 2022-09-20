@@ -32,9 +32,6 @@ const Description = () => {
             : 
        <Stack sx={{ width: '100%', color: 'grey.100' }} spacing={2}>
       </Stack>
-
-
-       
   )
 };
 

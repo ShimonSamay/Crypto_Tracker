@@ -58,7 +58,7 @@ import Tooltip from '@mui/material/Tooltip';
   };
 
   const handleModal = () => {
-    modalRef.current.open ?  modalRef.current.close() :  modalRef.current.showModal() ;
+    modalRef.current.open ?  modalRef.current.close() : modalRef.current.showModal() ;
   };
  
   return (
