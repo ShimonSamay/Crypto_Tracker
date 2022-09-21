@@ -10,7 +10,8 @@
     "server": "nodemon node server/server.js",
     "client": "cd client && npm run start",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "build":"npm run setup" 
+    "build":"npm run setup" ,
+    "render-postbuild": "cd client && npm install --only=dev && npm install && npm run build" 
   },
   "author": "",
   "license": "ISC",
