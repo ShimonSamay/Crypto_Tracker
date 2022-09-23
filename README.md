@@ -11,7 +11,8 @@
  ✔ Node.js + Express \
  ✔ MongoDB \
  ✔ Material Ui \
- ✔ Chart.js
+ ✔ Chart.js \
+ ✔ [Coin gecko api](https://www.coingecko.com/en/api)
 
 
 
