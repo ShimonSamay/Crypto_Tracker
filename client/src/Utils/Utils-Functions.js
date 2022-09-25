@@ -1,5 +1,5 @@
 export const validatePasswords = (user , confirmPassword) => {
- return user.password === confirmPassword ;
+  return user.password === confirmPassword ;
 } ;
 
 export const addCommas = (string) => {
@@ -9,3 +9,5 @@ export const addCommas = (string) => {
 export const destructureItem = (item) => {
   return item.length ? [...item] : {...item} ;
 };
+
+

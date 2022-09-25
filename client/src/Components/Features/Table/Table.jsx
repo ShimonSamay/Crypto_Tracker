@@ -1,10 +1,10 @@
 import "./Table.css";
-import { useContext , useLayoutEffect , useRef, useState } from "react";
-import { ReducersContext } from "../../../Contexts/Context";
-import { cryptoStatsActions } from "../../../Actions/Crypto-Stats-Actions";
-import { logoutAction } from "../../../Actions/User-Action";
-import { destructureItem , addCommas } from "../../../Utils/Utils-Functions";
-import { removeFromWishlist , addToWishlist } from "../../../Actions/User-Action";
+import { useContext , useEffect , useRef, useState } from "react";
+import { globalStatesContext } from "Contexts/Context";
+import { cryptoStatsActions } from "Actions/Crypto-Stats-Actions";
+import { logoutAction } from "Actions/User-Action";
+import { destructureItem , addCommas } from "Utils/Utils-Functions";
+import { removeFromWishlist , addToWishlist } from "Actions/User-Action";
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import Badge from '@mui/material/Badge';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
@@ -21,21 +21,23 @@ import Tooltip from '@mui/material/Tooltip';
 
  const CryptoTable = () => {
 
-  const {cryptoData , cryptoStatsDispatch , appNavigator , user , userDispatch} = useContext(ReducersContext);
+  const { cryptoData , cryptoStatsDispatch , appNavigator , user , userDispatch } = useContext(globalStatesContext);
+
   const [tableData , setTableData] = useState([]);
+  
   const modalRef = useRef();
   
-  useLayoutEffect(() => {
+  useEffect(() => {
     cryptoData.length && setTableData(destructureItem(cryptoData.sort((a,b) => a.market_cap - b.market_cap)));
   } , [cryptoData]);
 
   const sortByCategory = (e) => {
-    const {category} = e.target.dataset;
+    const { category } = e.target.dataset;
     setTableData(destructureItem(tableData.sort((a,b) => b[category] - a[category])));
   };
   
   const searchCryptoByName = (e) => {
-     const {value} = e.target ;
+     const { value } = e.target ;
      const matches = cryptoData.filter(crypto => crypto.name.toLowerCase().indexOf(value) > -1);
      matches.length && setTableData(destructureItem(matches));
   };

@@ -1,23 +1,40 @@
 import "./Login.css";
+import jwt_decode from "jwt-decode";
 import { useContext , useRef , useState } from "react";
-import { ReducersContext } from "../../../Contexts/Context";
-import { loginAction } from "../../../Actions/User-Action";
-import { loginHandler } from "../../../Services/User";
+import { globalStatesContext } from "Contexts/Context";
+import { loginAction } from "Actions/User-Action";
+import { loginHandler } from "Services/User";
+import { validatePasswords } from "Utils/Utils-Functions";
 
 
 const Login = ({setRegisterScreen}) => {
 
-   const { user, userDispatch , appNavigator } = useContext(ReducersContext);
-   const [message , setMessage] = useState("") ;
+   const { user, userDispatch , appNavigator } = useContext(globalStatesContext);
+
+   const [errorMessage , setErrorMessage] = useState("") ;
+   
    const inputRef = useRef();
 
    const getInputValues = (e) => {
     user[e.target.name] = e.target.value;
   };
 
-   const login = (e) => {
-    e.preventDefault();
-    loginHandler(user , userDispatch , loginAction , setMessage , inputRef.current.value , appNavigator)
+  const notifyAboutError = (content) => {
+    setErrorMessage(content);
+    setTimeout(() => {
+      setErrorMessage("");
+          } , 3000)
+  };
+
+   const login = async (e) => {
+      e.preventDefault();
+      const matchedPasswords = validatePasswords(user, inputRef.current.value)
+      if (!matchedPasswords) return notifyAboutError("Password confirmation failed ...");
+      const serverResponse = await loginHandler(user);
+      if (!serverResponse.token) return notifyAboutError(serverResponse.message);
+      const decoded = jwt_decode(serverResponse.token);
+      userDispatch(loginAction(decoded.user));
+      appNavigator("/coins");
   };
  
   return (
@@ -31,7 +48,7 @@ const Login = ({setRegisterScreen}) => {
             <input ref={inputRef} className="Confirm-Input" type="password" name="confirmPassword" required="required" placeholder="Confirm Password"/>
           </div>
           <div className="button-panel">
-            <span>{message}</span>
+            <span>{errorMessage}</span>
             <button>Login</button>
           </div>
         </form>

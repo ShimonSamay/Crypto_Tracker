@@ -1,10 +1,10 @@
 import { useContext } from "react"
 import { Outlet } from "react-router";
-import Home from "../../Pages/Home/Home";
-import { ReducersContext } from "../../../Contexts/Context"
+import Home from "Components/Pages/Home/Home";
+import { globalStatesContext } from "Contexts/Context"
 
 const ProtectedRoutes = () => {
-  const {user} = useContext(ReducersContext) ;
+  const {user} = useContext(globalStatesContext) ;
 
   return (
     user.loggedIn ? <Outlet/> : <Home/>

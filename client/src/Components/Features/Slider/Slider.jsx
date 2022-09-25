@@ -1,12 +1,12 @@
 import "./Slider.css";
 import { useContext } from "react";
-import { ReducersContext } from "../../../Contexts/Context";
-import { addCommas } from "../../../Utils/Utils-Functions";
+import { globalStatesContext } from "Contexts/Context";
+import { addCommas } from "Utils/Utils-Functions";
 import AliceCarousel from 'react-alice-carousel';
 
 const Slider = () => {
 
-  const {cryptoData} = useContext(ReducersContext);
+  const { cryptoData } = useContext(globalStatesContext);
 
   let coins = cryptoData.map((coin) => 
     <section className="coins-info-container">

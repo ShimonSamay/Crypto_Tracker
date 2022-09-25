@@ -2,7 +2,7 @@ import Home from "./Components/Pages/Home/Home";
 import CryptosInfo from "./Components/Pages/Cryptos/Cryptos-Info";
 import CryptoInfo from "./Components/Pages/Crypto/Crypto-info";
 import ReducersProvider from "./Contexts/Context";
-import ProtectedRoutes from "./Components/Features/Protected Routes/Protected";
+import ProtectedRoutes from "Components/Features/Protected Routes/Protected";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 

@@ -1,21 +1,35 @@
 import "./Register.css";
 import { useState } from "react";
-import { registerHandler } from "../../../Services/User";
+import { registerHandler } from "Services/User";
 
 const Register = ({setLoginScreen}) => {
 
   const [newUser,setNewUser] = useState({}) ;
+
   const [message , setMessage] = useState("") ;
   
   const getInputValues = (e) => {
     newUser[e.target.name] = e.target.value;
   };
 
-  const register = (e) => {
-    e.preventDefault();
-    setNewUser({...newUser});
-    registerHandler(newUser , setMessage);
+  const setMessageContent = (content) => {
+    setMessage(content);
+    setTimeout(() => {
+      setMessage("");
+        } , 3000)
   };
+
+  const register = async (e) => {
+      e.preventDefault();
+      setNewUser({...newUser});
+      const serverResponse = await registerHandler(newUser);
+      setMessageContent(serverResponse.message);
+      if (serverResponse.success) {
+        setTimeout(() => {
+          setLoginScreen();
+        }, 3000);
+  }
+}
 
   return (
     <section className="Register-Container">

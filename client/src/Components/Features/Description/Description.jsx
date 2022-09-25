@@ -1,25 +1,32 @@
 import "./Description.css";
-import { useLayoutEffect, useContext , useState} from "react";
-import { ReducersContext } from "../../../Contexts/Context";
-import { getSingleCoin } from "../../../Services/Crypto-Data";
-import { addCommas } from "../../../Utils/Utils-Functions";
+import { useEffect, useContext , useState} from "react";
+import { globalStatesContext } from "Contexts/Context";
+import { getSingleCoin } from "Services/Crypto-Data";
+import { addCommas } from "Utils/Utils-Functions";
 import Stack from '@mui/material/Stack';
 import parse from "html-react-parser";
 
 const Description = () => {
 
-  const {cryptoStats} = useContext(ReducersContext);
+  const { cryptoStats } = useContext(globalStatesContext);
+
   const [coin , setCoin] = useState({});
 
-  useLayoutEffect(() => {
-    cryptoStats.id && getSingleCoin(cryptoStats.id , setCoin);
-  } , [cryptoStats])
+  const getCoinData = async () => {
+   const data = await getSingleCoin(cryptoStats.id);
+   if (data.id) setCoin(data);
+  }
 
+  useEffect(() => {
+    cryptoStats.id && getCoinData();
+  } , [cryptoStats])
+  
+ 
   return (
     coin.id ? 
     <section className="info-Section">
           <section className="description">
-              <img src={coin.image.large}/>
+              <img src={coin.image.large} alt={`${coin.name}`}/>
              <section className="description-content">
                <p>{coin?.name}</p>
                <p>{parse(coin?.description.en.split(". ")[0])}.</p>

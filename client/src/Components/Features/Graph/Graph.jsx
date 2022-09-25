@@ -1,18 +1,24 @@
 import "./Graph.css";
-import { useLayoutEffect, useContext, useState } from "react";
-import { getsCoinHistoricGraph } from "../../../Services/Crypto-Data";
-import { ReducersContext } from "../../../Contexts/Context";
+import { useContext, useState, useEffect } from "react";
+import { getsCoinHistoricGraph } from "Services/Crypto-Data";
+import { globalStatesContext } from "Contexts/Context";
 import { Line } from "react-chartjs-2" ;
 import Stack from '@mui/material/Stack';
 import LinearProgress from '@mui/material/LinearProgress';
 
 const Graph = () => {
 
-  const {cryptoStats} = useContext(ReducersContext);
+  const { cryptoStats } = useContext(globalStatesContext);
+
   const [graphData , setGraphData] = useState([]);
 
-  useLayoutEffect(() => {
-    cryptoStats.id && getsCoinHistoricGraph(cryptoStats.id , setGraphData)
+  const getGraphData = async () => {
+     const data = await getsCoinHistoricGraph(cryptoStats.id);
+     if (data.prices) setGraphData (data.prices) ;
+  }
+
+  useEffect(() => {
+    cryptoStats.id && getGraphData();
   } , [cryptoStats])
 
   return (

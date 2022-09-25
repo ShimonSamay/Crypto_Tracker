@@ -1,55 +1,35 @@
-import jwt_decode from "jwt-decode";
-import { validatePasswords } from "../Utils/Utils-Functions";
 
-const baseUrl = process.env.NODE_ENV === 'production' ?  
-"https://crypto-tracker-7284.onrender.com/users" : 'http://localhost:6500/users';
+const baseUrl = process.env.NODE_ENV === "production" ? 
+"https://crypto-tracker-7284.onrender.com/users" : "http://localhost:6500/users";
 
+const createFetchOptions = (data) => {
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  };
+  return options ;
+}
 
-export const registerHandler = async (user , setMessage) => {
-    let options = {
-        method: "POST" ,
-        headers: { "Content-Type" : "application/json" } ,
-        body: JSON.stringify(user)
-    } 
-   return await fetch (`${baseUrl}/register` , options )
-    .then(response => response.json())
-    .then(response => {
-      console.log({response});
-       setMessage(response.message);
-       setTimeout(() => {
-        setMessage("")
-       } , 3000);
-    })
-    .catch(error => error)
+export const registerHandler = async (user) => {
+  try {
+     const options = createFetchOptions(user) ;
+     const response = await fetch(`${baseUrl}/register`, options)
+     const data = await response.json();
+     return data ;
+  }
+  catch (err) {
+    return err ;
+  }
 };
 
-export const loginHandler = async (user , dispatch , action , setErrMessage , passwordToConfirm , navigate) => {
-   if (validatePasswords(user , passwordToConfirm)) {
-    let options = {
-        method: "POST" ,
-        headers: { "Content-Type" : "application/json" } ,
-        body: JSON.stringify(user)
-    }
-    return await fetch (`${baseUrl}/login` , options)
-    .then(response => response.json())
-    .then(response => {
-     if (!response.success ) {
-        setErrMessage(response.message) ;
-        setTimeout(() => {
-          setErrMessage("")
-        } , 3000) ;
-     }
-      const decoded = jwt_decode(response.token);
-      dispatch(action(decoded.user));
-      navigate("/coins");
-    })
-    .catch(error => error)
-}
-  else {
-    setErrMessage("Password confirmation failed ...");
-    setTimeout(() => {
-        setErrMessage("");
-    } , 3000)
+export const loginHandler = async (user) => {
+  try {
+   const options = createFetchOptions(user);
+    const response = await fetch(`${baseUrl}/login`, options);
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    return err;
   }
-}
-
+};

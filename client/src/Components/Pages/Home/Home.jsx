@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Login from "../../Features/Login/Login" ;
-import Register from "../../Features/Register/Register";
+import Login from "Components/Features/Login/Login" ;
+import Register from "Components/Features/Register/Register";
 
 
 const Home = () => {

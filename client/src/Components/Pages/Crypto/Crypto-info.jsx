@@ -1,5 +1,5 @@
-import Description from "../../Features/Description/Description";
-import Graph from "../../Features/Graph/Graph";
+import Description from "Components/Features/Description/Description";
+import Graph from "Components/Features/Graph/Graph";
 
 const CryptoInfo = () => {
    return (
