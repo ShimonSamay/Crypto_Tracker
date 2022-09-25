@@ -18,7 +18,8 @@
 
 
 
-![Screenshot](https://user-images.githubusercontent.com/87431321/191919567-5e8ab592-4583-41c0-b6be-6c6e815e4393.png)
+![Screenshot](https://user-images.githubusercontent.com/87431321/192138336-c3ce73c5-432e-46a9-8f57-aaa261fd4fab.png)
+
 
 
 
