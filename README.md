@@ -1,7 +1,7 @@
 # 📈 Crypto Tracker 📈
 
 **A web application that provides up-to-date information on a variety of cryptocurrencies.** \
-**Includes Authentication && Authentication , Sorting and Searching methods and receiving detailed information about a specific currency.**
+**Includes authentication && authorization , Sorting and Searching methods and receiving detailed information about a specific currency.**
 
 
 
