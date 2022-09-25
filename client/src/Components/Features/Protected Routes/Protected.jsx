@@ -4,7 +4,8 @@ import Home from "Components/Pages/Home/Home";
 import { globalStatesContext } from "Contexts/Context"
 
 const ProtectedRoutes = () => {
-  const {user} = useContext(globalStatesContext) ;
+  
+  const { user } = useContext(globalStatesContext) ;
 
   return (
     user.loggedIn ? <Outlet/> : <Home/>

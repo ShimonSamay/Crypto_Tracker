@@ -6,16 +6,25 @@ import { useNavigate } from "react-router";
 
 export const globalStatesContext = createContext() ;
 
-const ReducersProvider = ({children}) => {
+const GlobalStatesProvider = ({ children}) => {
+
    const [user , userDispatch] = useReducer(userReducer , {loggedIn:false}) ;
    const [cryptoData , cryptoDataDispatch] = useReducer(cryptoDataReducer , []) ;
    const [cryptoStats , cryptoStatsDispatch] = useReducer(cryptoStatsReducer , {}) ;
    const appNavigator = useNavigate();
+
+   const globalStates = {
+    user , userDispatch ,
+    cryptoData , cryptoDataDispatch ,
+    cryptoStats , cryptoStatsDispatch ,
+    appNavigator 
+   }
+
   return (
-    <globalStatesContext.Provider value={{user , userDispatch , cryptoData , cryptoDataDispatch , cryptoStats , cryptoStatsDispatch , appNavigator }}>
+    <globalStatesContext.Provider value={globalStates}>
       {children}
     </globalStatesContext.Provider>
   )
 }
 
-export default ReducersProvider ;
+export default GlobalStatesProvider ;

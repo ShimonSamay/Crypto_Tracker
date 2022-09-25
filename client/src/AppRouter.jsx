@@ -1,7 +1,7 @@
-import Home from "./Components/Pages/Home/Home";
-import CryptosInfo from "./Components/Pages/Cryptos/Cryptos-Info";
-import CryptoInfo from "./Components/Pages/Crypto/Crypto-info";
-import ReducersProvider from "./Contexts/Context";
+import Home from "Components/Pages/Home/Home";
+import CryptosInfo from "Components/Pages/Cryptos/Cryptos-Info";
+import CryptoInfo from "Components/Pages/Crypto/Crypto-info";
+import GlobalStatesProvider from "Contexts/Context";
 import ProtectedRoutes from "Components/Features/Protected Routes/Protected";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -9,7 +9,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 const AppRouter = () => {
     return (
         <BrowserRouter>
-         <ReducersProvider>
+         <GlobalStatesProvider>
           <Routes>
               <Route exact path="/" element={<Home/>}/>
               <Route element={<ProtectedRoutes/>}>
@@ -17,7 +17,7 @@ const AppRouter = () => {
                 <Route exact path="/coin" element={<CryptoInfo/>}/>
               </Route>
           </Routes>
-         </ReducersProvider>
+         </GlobalStatesProvider>
        </BrowserRouter>
     )
 };
